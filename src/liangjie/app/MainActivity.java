@@ -12,36 +12,38 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends Activity {
-	private Bitmap bm1;
-	Long start;
+	private Bitmap bm1, bm2;
 	private Utils utils;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		bm1 = readBitMap(this, R.raw.first);// 将项目中的图片生成Bitmap对象
-		start = System.currentTimeMillis();
 		utils = new Utils();
-		Log.i("Time1", "" + start);
+
 		int img[] = { R.raw.img1, R.raw.img2, R.raw.img3, R.raw.img4, R.raw.img5 };
 		int img1[] = { R.raw.fourth, R.raw.third, R.raw.first, R.raw.fifth, R.raw.second };
 		for (int i = 0; i < img1.length; i++) {
+			bm1 = readBitMap(this, img1[i]);
 			List<Double> list = new ArrayList<Double>();
-			for (int j = 0; j < img.length; j++) {
-				double d = compareByInt(readBitMap(this, img1[i]), readBitMap(this, img[j]));
+			for (int j = 0; j < img.length; j++) {	
+				bm2 = readBitMap(this, img[j]);
+				Long start = System.currentTimeMillis();
+				Log.i("Time1", "" + start);
+				double d = compareByInt(bm1, bm2);
+				Log.i("TAG", "It takes:" + (System.currentTimeMillis() - start));
 				list.add(d);
 			}
 			int index = 0;
 			for (int k = 1; k < list.size(); k++) {
-				if (list.get(k) >=list.get(index)) {
+				if (list.get(k) >= list.get(index)) {
 					index = k;
-				} 
+				}
 			}
 			Log.i("db>>>>>", "" + list);
-			Log.i("PAGE", "is same with:img>>>>>>>>" + (index+1));
+			Log.i("PAGE", "is same with:img>>>>>>>>" + (index + 1));
 		}
-		Log.i("TAG", "It takes:" + (System.currentTimeMillis() - start));
+
 	}
 
 	private double compareByInt(Bitmap bm1, Bitmap bm2) {
