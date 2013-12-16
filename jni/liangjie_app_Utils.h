@@ -9,11 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     liangjie_app_Utils
- * Method:    compareBitmap
- * Signature: ([BII[BII)[D
+ * Method:    compareintBitmap
+ * Signature: ([III[III)[D
  */
-JNIEXPORT jdoubleArray JNICALL Java_liangjie_app_Utils_compareBitmap
-  (JNIEnv *, jobject, jbyteArray, jint, jint, jbyteArray, jint, jint);
+JNIEXPORT jdoubleArray JNICALL Java_liangjie_app_Utils_compareintBitmap
+  (JNIEnv *, jobject, jintArray, jint, jint, jintArray, jint, jint);
 
 #ifdef __cplusplus
 }
