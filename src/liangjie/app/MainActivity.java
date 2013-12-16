@@ -20,18 +20,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		utils = new Utils();
-
 		int img[] = { R.raw.img1, R.raw.img2, R.raw.img3, R.raw.img4, R.raw.img5 };
 		int img1[] = { R.raw.fourth, R.raw.third, R.raw.first, R.raw.fifth, R.raw.second };
 		for (int i = 0; i < img1.length; i++) {
 			bm1 = readBitMap(this, img1[i]);
 			List<Double> list = new ArrayList<Double>();
-			for (int j = 0; j < img.length; j++) {	
+			for (int j = 0; j < img.length; j++) {
 				bm2 = readBitMap(this, img[j]);
-				Long start = System.currentTimeMillis();
-				Log.i("Time1", "" + start);
 				double d = compareByInt(bm1, bm2);
-				Log.i("TAG", "It takes:" + (System.currentTimeMillis() - start));
 				list.add(d);
 			}
 			int index = 0;
@@ -57,7 +53,10 @@ public class MainActivity extends Activity {
 		secondH = bm2.getHeight();
 		secondImgPixels = new int[secondW * secondH];
 		bm2.getPixels(secondImgPixels, 0, secondW, 0, 0, secondW, secondH);
+		Long start = System.currentTimeMillis();
+		Log.i("Time1", "" + start);
 		double d = utils.compareintBitmap(firstImgPixels, firstW, firstH, secondImgPixels, secondW, secondH);
+		Log.i("TAG", "It takes:" + (System.currentTimeMillis() - start));
 		return d;
 	}
 
